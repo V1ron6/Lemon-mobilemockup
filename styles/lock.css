@@ -1,0 +1,55 @@
+.clock { text-align: center; margin-top: 36px; text-shadow: 0 2px 14px rgba(0, 0, 0, 0.55); }
+#hour { font-size: 4.6rem; font-weight: 600; line-height: 1; letter-spacing: 1px; font-variant-numeric: tabular-nums; }
+#date { margin-top: 4px; font-size: 1.05rem; color: var(--ink-dim); }
+
+.notif-head {
+  margin: auto 18px 6px;
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 12px; color: var(--ink-dim);
+  text-shadow: 0 1px 3px rgba(0,0,0,.6);
+}
+.notif-head button {
+  border: 0; background: var(--glass); border-radius: 12px; padding: 2px 10px; font-size: 11px;
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+}
+.notifications {
+  margin: 0 14px; max-height: 198px; overflow-y: auto; scrollbar-width: none;
+  display: flex; flex-direction: column; gap: 6px;
+}
+.notifications::-webkit-scrollbar { display: none; }
+
+.notifications:empty ~ .shortcuts { margin-top: auto; }
+
+.notif {
+  display: grid; grid-template-columns: 4px 1fr auto; gap: 10px; align-items: center;
+  padding: 8px 10px; border-radius: 14px;
+  background: var(--glass);
+  border: 1px solid var(--glass-line);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  text-align: left; width: 100%; color: var(--ink);
+  animation: notifIn 0.35s var(--ease) backwards;
+  transition: transform 0.25s var(--ease), opacity 0.25s;
+}
+.notif::before { content: ""; align-self: stretch; border-radius: 4px; background: linear-gradient(180deg, #92bdf9, #316ff6, #1941ba); }
+.notif:hover { background: rgba(255, 255, 255, 0.24); }
+.notif.out { transform: translateX(110%); opacity: 0; }
+.notif .sender { font-size: 11px; color: var(--ink-dim); text-transform: capitalize; }
+.notif .msg { font-size: 14px; line-height: 1.2; }
+.notif time { font-size: 11px; color: var(--ink-dim); align-self: start; }
+@keyframes notifIn { from { opacity: 0; transform: translateY(12px); } }
+
+.shortcuts { display: flex; justify-content: space-between; align-items: center; padding: 12px 22px 22px; }
+.round {
+  width: 44px; height: 44px; border-radius: 50%;
+  display: grid; place-items: center;
+  border: 1px solid var(--glass-line);
+  background: var(--glass);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  transition: transform 0.15s, background 0.15s, border-color 0.15s;
+}
+.round img { width: 20px; height: 20px; filter: invert(1); }
+.round:hover { transform: scale(1.07); border-color: var(--accent); }
+.round:active { transform: scale(0.95); }
+.round.primary { width: 52px; height: 52px; }
+.round[aria-pressed="true"] { background: var(--glass-strong); }
+.round[aria-pressed="true"] img { filter: none; }

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#05060f">
+  <meta name="description" content="lemón — a tiny phone-OS simulator in vanilla HTML, CSS and JS.">
+  <title>lemón</title>
+  <link rel="stylesheet" href="./styles/base.css">
+  <link rel="stylesheet" href="./styles/lock.css">
+  <link rel="stylesheet" href="./styles/pin.css">
+  <link rel="stylesheet" href="./styles/home.css">
+  <link rel="stylesheet" href="./styles/shade.css">
+</head>
+<body>
+  <main class="stage">
+    <div class="phone" id="phone">
+      <div class="top" aria-hidden="true">
+        <span id="cam"></span>
+        <span id="led"></span>
+      </div>
+
+      <div class="screen" id="screen" data-view="lock">
+
+        <button class="status" id="status" type="button" aria-label="Open quick settings" aria-expanded="false">
+          <span id="carrier">Arcnet</span>
+          <span class="status-icons">
+            <img id="st-wifi" src="./logo/replacements/wifi.svg" alt="Wi-Fi">
+            <img id="st-bt" src="./logo/replacements/bluetooth.svg" alt="Bluetooth" hidden>
+            <img id="st-dnd" src="./logo/replacements/moon.svg" alt="Do not disturb" hidden>
+            <span class="battery" id="battery" role="img" aria-label="Battery 100%"><i id="battery-level"></i></span>
+            <span id="battery-pct">100%</span>
+          </span>
+        </button>
+
+        <section class="view" id="view-lock" aria-label="Lock screen">
+          <div class="clock">
+            <p id="hour">00:00</p>
+            <p id="date">&nbsp;</p>
+          </div>
+
+          <div class="notif-head" id="notif-head" hidden>
+            <span>Notifications</span>
+            <button type="button" id="notif-clear">Clear all</button>
+          </div>
+          <ul class="notifications" id="notifications" aria-live="polite"></ul>
+
+          <div class="shortcuts">
+            <button type="button" class="round" id="btn-light" aria-label="Flashlight" aria-pressed="false">
+              <img src="./logo/lightbulb.svg" alt="">
+            </button>
+            <button type="button" class="round primary" id="btn-unlock" aria-label="Unlock">
+              <img src="./logo/lock.svg" alt="">
+            </button>
+            <button type="button" class="round" id="btn-camera" aria-label="Camera">
+              <img src="./logo/camera.svg" alt="">
+            </button>
+          </div>
+        </section>
+
+        <section class="view" id="view-pin" aria-label="Enter PIN" hidden>
+          <div class="pin">
+            <p id="pin-msg" role="status" aria-live="polite">Enter your PIN</p>
+            <div class="dots" id="dots" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+            <div class="keys" id="keys">
+              <button type="button" data-k="1">1</button>
+              <button type="button" data-k="2">2</button>
+              <button type="button" data-k="3">3</button>
+              <button type="button" data-k="4">4</button>
+              <button type="button" data-k="5">5</button>
+              <button type="button" data-k="6">6</button>
+              <button type="button" data-k="7">7</button>
+              <button type="button" data-k="8">8</button>
+              <button type="button" data-k="9">9</button>
+              <button type="button" class="ghost" id="pin-cancel">Cancel</button>
+              <button type="button" data-k="0">0</button>
+              <button type="button" class="ghost" id="pin-del" aria-label="Delete">&#9003;</button>
+            </div>
+            <p class="hint" id="pin-hint"></p>
+          </div>
+        </section>
+
+        <section class="view" id="view-home" aria-label="Home screen" hidden>
+          <div class="grid-wrap">
+            <ul class="grid" id="grid"></ul>
+          </div>
+          <ul class="dock" id="dock"></ul>
+        </section>
+
+        <section class="view app" id="view-app" aria-label="App" hidden>
+          <header class="app-bar">
+            <img id="app-icon" src="" alt="">
+            <h1 id="app-title">App</h1>
+          </header>
+          <div class="app-body" id="app-body"></div>
+        </section>
+
+        <aside class="shade" id="shade" aria-label="Quick settings" aria-hidden="true" inert>
+          <div class="shade-head">
+            <span id="shade-time">00:00</span>
+            <button type="button" id="shade-close" aria-label="Close quick settings">&times;</button>
+          </div>
+          <div class="tiles" id="tiles"></div>
+          <label class="slider">
+            <span>Brightness</span>
+            <input type="range" id="brightness" min="30" max="100" value="100">
+          </label>
+        </aside>
+
+        <div class="dim" id="dim" aria-hidden="true"></div>
+
+        <nav class="nav" id="nav" aria-label="System navigation">
+          <button type="button" id="nav-home" aria-label="Home"><img src="./logo/house.svg" alt=""></button>
+          <button type="button" id="nav-lock" aria-label="Lock"><img src="./logo/lock.svg" alt=""></button>
+        </nav>
+      </div>
+    </div>
+  </main>
+
+  <script src="./script/data.js"></script>
+  <script src="./script/screen.js"></script>
+  <script src="./script/clock.js"></script>
+  <script src="./script/notifications.js"></script>
+  <script src="./script/pin.js"></script>
+  <script src="./script/home.js"></script>
+  <script src="./script/shade.js"></script>
+  <script src="./script/main.js"></script>
+</body>
+</html>
